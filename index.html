@@ -1,47 +1,658 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="music.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchMart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between; /* Align items to the ends */
+            padding: 10px 20px;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo img {
+            height: 40px; /* Adjust logo image size */
+        }
+
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px; /* Adjusted margin for better spacing */
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Carousel Container */
+        .carousel-container {
+            display: flex;
+            margin-top: 60px; /* Adjust to accommodate the fixed navbar */
+            padding: 20px;
+            height: 500px;
+            background-color: #cce4f7;
+        }
+
+        .text-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-size: 50px;
+            font-weight: bold;
+            color: #333;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .text-item {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            font-size: 50px;
+        }
+
+        .text-item.show {
+            opacity: 1;
+            animation: textZoom 1s ease-in-out forwards;
+        }
+
+        /* Text Animation */
+        @keyframes textZoom {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .carousel-images {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #cce4f7;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .carousel-images img {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+        }
+
+        .carousel-images img.show {
+            opacity: 1;
+        }
+
+        /* Feature Boxes */
+        .feature-boxes {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .box {
+            width: 380px;
+            height: 250px;
+            background-color: #87CEFA;
+            border: 3px solid #1E90FF;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .box h3 {
+            margin: 0 0 10px;
+            font-size: 28px;
+            color: #1E90FF;
+            font-weight: bold;
+        }
+
+        .box p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .box .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .box .btn:hover {
+            background-color: #001f3f;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Icons for text */
+        .text-container i {
+            font-size: 60px;
+            color: #1E90FF;
+            margin-bottom: 10px;
+        }
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            width: 320px;
+            text-align: center;
+            color: #FFFFFF;
+            margin: 15% auto;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* Updated styling for login options */
+        .login-options {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50; /* Green color for active button */
+            margin: 10px;
+        }
+
+        .login-btn.inactive {
+            background-color: #ccc; /* Gray color for inactive button */
+            color: black;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 6px;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"],
+        .login-container input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            color: #333333;
+        }
+
+        .login-container input[type="email"]:focus,
+        .login-container input[type="password"]:focus,
+        .login-container input[type="text"]:focus {
+            border-color: #888888;
+            background-color: #ffffff;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6A0D91;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .login-container button:hover {
+            background-color: #9B4F9F;
+        }
+
+        .signup-link {
+            margin-top: 25px;
+        }
+
+        .signup-link a {
+            color: #9B4F9F;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+         .footer-section {
+            width: 100%;
+            padding: 20px;
+            text-align: left; /* Ensure left alignment */
+        }
+
+        .footer-section h4 {
+            margin-bottom: 10px;
+        }
+
+        .footer-section p {
+            text-align: left; /* Ensure paragraph content is aligned to the left */
+            margin: 0;
+        }
+
+        /* You can also add specific width to the inner div if needed */
+        .footer-section div {
+            width: 200px; /* Adjust the width according to your design */
+        }
+
+        /* Additional styling to ensure that flex-row doesn't cause unintended centering */
+        .footer-section.d-flex {
+            justify-content: flex-start; /* Flexbox is aligned to the start */
+            align-items: flex-start; /* Makes sure items stay at the top-left */
+        }
+
+        .footer-section h4::after {
+                    content: '';
+                    display: block;
+                    width: 55px;
+                    height: 2px;
+                    background-color: #767272; /* Light grey */
+                    margin-top: 5px;
+        }
+        .footer-logo {
+            margin-top: 20px;
+            width: 120px;
+        }
+
+
+
+
+        .footer-section ul {
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ffffff; /* Default link color */
+            transition: color 0.1s ease, font-size 0.1s ease; /* Smooth transition for color and font size */
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            color: #f0a500; /* Hover color */
+            font-size: 1.1em; /* Slightly increase the font size on hover */
+        }
+
+
+    </style>
 </head>
-
 <body>
-    <div class="bg" id="sectionhomepage">
-        <h1 class="head1">Sleep Music</h1>
-        <p class="para1">Soothing bedtime music to help you fall into a deep and natural sleep</p>
-        <div class="card d-flex flex-column justify-content-center">
-            <h1 class="head2">Night Island</h1>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3IqjiZrPvq8h9PY9skcRJA1RVIY6BeZN7Tw&s" alt="MatchMart Logo">
         </div>
-        <p class="para1">Non-stop 8-hour mixes of our most popular sleep audio</p>
-        <div class="d-flex flex-row justify-content-center">
-            <button class="but1" onclick="display('sectionmusicdetails')">Get Started</button>
-        </div>
-    </div>
-    <div id="sectionmusicdetails" class="bg-inner">
-        <img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/clouds-img.png" height=300px width=600px />
-        <h1 class="head3">Night Island</h1>
-        <p class="para2">Ease the mind into a restful night's sleep with these deep,ambient tones.</p>
-        <p class="para2">45 MIN SLEEP MUSIC</p>
-        <h1 class="head4">Related</h1>
-        <div class="d-flex flex-row">
-            <div class="card11">
-                <img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/moon-clouds-img.png" class="img1" />
-                <h1 class="head4">Moon Clouds</h1>
-                <p class="para2">55 MIN SLEEP MUSIC</p>
-            </div>
-            <div class="card11">
-                <img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/sweet-sleep-img.png" class="img1" />
-                <h1 class="head4">Sweet Sleep</h1>
-                <p class="para2">60 MIN SLEEP MUSIC</p>
-            </div>
-        </div>
-        <button class="but2" onclick="display('sectionhomepage')">Back</button>
-    </div>
-    <script type="text/javascript" src="https://new-assets.ccbp.in/frontend/content/static-ccbp-ui-kit/static-ccbp-ui-kit.js"></script>
-</body>
+        <ul class="nav-links">
+            <li><a href="#" id="loginLink">Login</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Vendor</a></li>
+            <li><a href="#">Client</a></li>
+        </ul>
+    </nav>
 
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="login-container">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+
+            <!-- Login Type Options -->
+            <div class="login-options">
+                <button id="userLoginBtn" class="login-btn active">User</button>
+                <button id="vendorLoginBtn" class="login-btn inactive">Vendor</button>
+            </div>
+            {% if message %}
+            <p>{{message}}</p>
+            {% endif %}
+            <!-- User Login Form -->
+            <form id="userLoginForm" action="/perform_login" method="POST">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="user_email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="user_password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+
+            <!-- Vendor Login Form (Initially Hidden) -->
+            <form id="vendorLoginForm" action="/perform_login2" method="POST" style="display: none;">
+                <div class="input-group">
+                    <label for="vendor_email">Vendor Email</label>
+                    <input type="email" id="vendor_email" name="vendor_email" required>
+                </div>
+                <div class="input-group">
+                    <label for="vendor_password">Vendor Password</label>
+                    <input type="password" id="vendor_password" name="vendor_password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="signup-link">
+                <p>Don't have an account? <a href="#" id="signupLink">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign-Up Modal -->
+    <div id="signupModal" class="modal">
+        <div class="login-container">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form action="/perform_registration" method="POST">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="user_name" required>
+                </div>
+                <div class="input-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="user_email" required>
+                </div>
+                <div class="input-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="user_password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Carousel with Images and Text -->
+    <div class="carousel-container">
+        <div class="text-container">
+            <i class="fas fa-camera"></i> <!-- Font Awesome icon -->
+            <div class="text-item show">
+                <div>Snap and Shop</div>
+                <div>Find Best Deals</div>
+            </div>
+            <div class="text-item">
+                <div>Discover New Products</div>
+                <div>Shop Easily</div>
+            </div>
+            <div class="text-item">
+                <div>Explore New Trends</div>
+                <div>Save Money Today</div>
+            </div>
+            <div class="text-item">
+                <div>Get The Latest Offers</div>
+                <div>Never Miss Out</div>
+            </div>
+        </div>
+        <div class="carousel-images">
+            <img src="https://www.gomage.com/wp-content/uploads/2014/06/Product-Search_-Understanding-Keywords-and-Criteria.jpg" alt="Image 1" class="show">
+            <img src="https://img.freepik.com/premium-photo/woman-shopper-happy-with-phone-grocery-department-browsing-shopping-list-online-app-choosing_321831-14101.jpg" alt="Image 2">
+            <img src="https://thumbnails.yayimages.com/1600/10/ef0/10ef00f4.jpg" alt="Image 3">
+            <img src="https://www.fatbit.com/fab/wp-content/uploads/2020/06/onlne-grocery-business.png" alt="Image 4">
+        </div>
+    </div>
+
+    <!-- Feature Boxes -->
+    <div class="feature-boxes">
+        <div class="box">
+            <h3><i class="fas fa-store"></i> Are You a Local Vendor?</h3>
+            <p>Join Our Platform</p>
+            <p>Connect with new citizens in your area and grow your business.</p>
+            <a href="/suv" class="btn">Sign Up as Vendor</a>
+        </div>
+        <div class="box">
+            <h3><i class="fas fa-search"></i> Find Services</h3>
+            <p style="margin: 40px;">Find the best local services.</p>
+            <a href="/login" class="btn">Find Services</a>
+        </div>
+        <div class="box">
+            <h3><i class="fas fa-bullhorn"></i> Connect Here</h3>
+            <p  style="margin: 34px;">Welcome to the family of vendors.</p>
+            <a href="#" class="btn">Explore Vendors</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Quick Links: <a href="#">Home</a> | <a href="#">Login</a> | <a href="#">About us</a> | <a href="#">Vendor</a> | <a href="#">Client</a> </p>
+            <div class="footer-section d-flex flex-row justify-content-between">
+                <div>
+                    <h4>About Us</h4>
+                    <p>MatchMart connects local vendors with customers, enabling businesses to thrive in local markets and communities. Join us to explore the best services and vendors in your area.</p>
+                </div>
+                <div style="margin-left: 30px;">
+                    <h4>Important Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Vendor</a></li>
+                        <li><a href="#">Client</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Contact Us</h4>
+                    <p>MatchMart Pvt Ltd<br>
+                        123 Market Street, City, Country<br>
+                        Phone: +123 456 7890<br>
+                        Email: contact@matchmart.com
+                     </p>
+                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3IqjiZrPvq8h9PY9skcRJA1RVIY6BeZN7Tw&s" alt="MatchMart Logo" class="footer-logo">
+
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"></a>
+            </div>
+            <p style="margin-top: 10px;">&copy; 2024 MatchMart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for carousel functionality -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        let currentIndex = 0;
+        const texts = document.querySelectorAll('.text-item');
+        const images = document.querySelectorAll('.carousel-images img');
+
+        function showNextSlide() {
+            texts.forEach(text => text.classList.remove('show'));
+            images.forEach(img => img.classList.remove('show'));
+
+            currentIndex = (currentIndex + 1) % texts.length;
+
+            texts[currentIndex].classList.add('show');
+            images[currentIndex].classList.add('show');
+        }
+
+        setInterval(showNextSlide, 3000);
+
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const loginLink = document.getElementById('loginLink');
+        const signupLink = document.getElementById('signupLink');
+        const closeButtons = document.getElementsByClassName('close');
+        const userLoginForm = document.getElementById('userLoginForm');
+        const vendorLoginForm = document.getElementById('vendorLoginForm');
+        const userLoginBtn = document.getElementById('userLoginBtn');
+        const vendorLoginBtn = document.getElementById('vendorLoginBtn');
+
+        // Open login modal
+        loginLink.onclick = function() {
+            loginModal.style.display = 'block';
+        };
+
+        // Close modal when clicking the close button
+        Array.from(closeButtons).forEach(function(closeBtn) {
+            closeBtn.onclick = function() {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+            };
+        });
+
+        // Open signup modal
+        signupLink.onclick = function() {
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'block';
+        };
+
+        // Switch to user login form
+        userLoginBtn.onclick = function() {
+            userLoginForm.style.display = 'block';
+            vendorLoginForm.style.display = 'none';
+            userLoginBtn.classList.add('active');
+            vendorLoginBtn.classList.remove('active');
+        };
+
+        // Switch to vendor login form
+        vendorLoginBtn.onclick = function() {
+            vendorLoginForm.style.display = 'block';
+            userLoginForm.style.display = 'none';
+            vendorLoginBtn.classList.add('active');
+            userLoginBtn.classList.remove('active');
+        };
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (event.target == signupModal) {
+                signupModal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
 </html>
