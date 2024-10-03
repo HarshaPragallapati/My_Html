@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+.bg {
+    background-image: url("https://new-assets.ccbp.in/frontend/static-website/moon-stars-bg.png");
+    height: 100vh;
+    background-size: cover;
+}
+
+.head1 {
+    color: #ffffff;
+    font-family: "Bree Serif";
+    padding-top: 130px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.para1 {
+    color: #ffffff;
+    font-family: "Bree Serif";
+    text-align: center;
+}
+
+.card {
+    background-image: url("https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/moon-bg.png");
+    height: 200px;
+    width: 350px;
+    background-size: cover;
+    margin: 20px;
+    border-radius: 10px;
+    margin-top: 210px;
+    margin-left: 130px;
+    margin-bottom: 0px;
+}
+
+.head2 {
+    text-align: center;
+    padding: 57px;
+    color: #ffe7bf;
+    font-size: 30px;
+    font-family: "Bree Serif";
+}
+
+.but1 {
+    border-radius: 13px;
+    border-width: 0px;
+    background-color: #8e97fd;
+    padding: 3px;
+    color: #ffffff;
+    height: 30px;
+    width: 100px;
+    font-size: 14px;
+}
+
+.bg-inner {
+    background-color: #03174c;
+}
+
+.head3 {
+    font-family: "Bree Serif";
+    color: #ffffff;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.para2 {
+    color: #98a1bd;
+    margin: 10px;
+    font-size: 15px;
+}
+
+.head4 {
+    font-family: "Bree Serif";
+    color: #ffffff;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.card11 {
+    margin: 10px;
+}
+
+.img1 {
+    height: 110px;
+    width: 180px;
+}
+
+.but2 {
+    border-radius: 13px;
+    border-width: 0px;
+    background-color: #8e97fd;
+    padding: 3px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    height: 30px;
+    width: 120px;
+    font-size: 14px;
+    margin: 10px;
+}

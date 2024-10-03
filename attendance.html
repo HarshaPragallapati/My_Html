@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Report</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <style>
+         body {
+            background-image: url('https://lh3.googleusercontent.com/7laseqhLTLyespr2eunxOGUkxd-fH8QJztby3JtalwKpNpryPr4H0QEGao4K_4ATdQ=h500');
+            background-repeat: no-repeat;
+            background-size: 40%;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .no-bg {
+            background-image: none;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+        }
+        
+        .header {
+            background-color: #007bff;
+            height: 100px;
+            padding: 30px;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        .head {
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 2px;
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 2px solid #007bff;
+            margin: 10px;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .box:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 10px;
+            margin-bottom: 70px;
+            margin-top: 50px;
+        }
+
+
+        .attendance-info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            display: none;
+        }
+
+        button {
+            margin: 10px;
+            height: 60px;
+            width: 100px;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        th, td {
+            border: 1px solid #96D4D4;
+            border-collapse: collapse;
+            width: 20%;
+        }
+
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+
+        .d-flex {
+            justify-content: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://lh3.googleusercontent.com/7laseqhLTLyespr2eunxOGUkxd-fH8QJztby3JtalwKpNpryPr4H0QEGao4K_4ATdQ=h500" alt="SRKR Logo">
+        <h1 class="head">SRKR Engineering College</h1>
+    </div>
+
+    <div id="sections">
+        <h2>Attendance Report - CSE</h2>
+
+        <div class="d-flex">
+            <div class="col-3 mb-4">
+                <div class="box" onclick="attendance('CSE - A')">CSE - A</div>
+            </div>
+            <div class="col-3 mb-4">
+                <div class="box" onclick="attendance('CSE - B')">CSE - B</div>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="col-3 mb-4">
+                <div class="box" onclick="attendance('CSE - C')">CSE - C</div>
+            </div>
+            <div class="col-3 mb-4">
+                <div class="box" onclick="attendance('CSE - D')">CSE - D</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-attendance" class="attendance-info">
+        <h2 id="sec" style="margin: 40px;"></h2>
+        <table class="table table-bordered" style="width: 80%;">
+            <tr style="background-color: greenyellow;">
+                <th>Roll Number</th>
+                <th>Student Name</th>
+                <th>Attendance(%)</th>
+                <th>Mobile Number</th>
+                <th>City</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Adarsh</td>
+                <td>80</td>
+                <td>9867584438</td>
+                <td>Palakol</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bhanu</td>
+                <td>84</td>
+                <td>9698984438</td>
+                <td>Bhimavaram</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Chandu</td>
+                <td>66</td>
+                <td>9875584438</td>
+                <td>Ongole</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Chanti</td>
+                <td>93</td>
+                <td>9867584777</td>
+                <td>Undi</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Dhruv</td>
+                <td>77</td>
+                <td>9884786789</td>
+                <td>Bhimavaram</td>
+            </tr>
+        </table>
+        <button class="btn btn-primary" onclick="goback()" style="font-size: 20px;">Back</button>
+    </div>
+
+    <script>
+        function attendance(section){
+            document.getElementById("sections").style.display = "none";
+            document.getElementById("section-attendance").style.display = "block";
+            document.getElementById("sec").textContent = section + " Attendance details";
+            document.body.classList.add("no-bg");
+        }
+        
+        function goback(){
+            document.getElementById("sections").style.display = "block";
+            document.getElementById("section-attendance").style.display = "none";
+            document.body.classList.remove("no-bg");
+        }
+    </script>
+</body>
+</html>
